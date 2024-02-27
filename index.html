@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country Information Example</title>
+</head>
+<body>
+
+<div id="countryInfoContainer"></div>
+
+<script>
+fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(data => {
+    const countryInfoContainer = document.getElementById('countryInfoContainer');
+    data.forEach(country => {
+      const countryInfo = document.createElement('div');
+      countryInfo.innerHTML = `
+        <p><strong>Name:</strong> ${country.name.common}</p>
+        <p><strong>Region:</strong> ${country.region}</p>
+        <p><strong>Subregion:</strong> ${country.subregion}</p>
+        <p><strong>Population:</strong> ${country.population.toLocaleString()}</p>
+        <hr>
+      `;
+      countryInfoContainer.appendChild(countryInfo);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching countries:', error);
+  });
+</script>
+
+</body>
+</html>

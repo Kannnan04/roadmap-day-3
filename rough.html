@@ -1,0 +1,31 @@
+ 
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Flags Example</title>
+    </head>
+    <body>
+    
+    <div id="flagsContainer"></div>
+    
+    <script>
+    fetch('https://restcountries.com/v3.1/all')
+      .then(response => response.json())
+      .then(data => {
+        const flagsContainer = document.getElementById('flagsContainer');
+        data.forEach(country => {
+          const flag = document.createElement('img');
+          flag.src = country.flags.png;
+          flag.alt = country.name.common + " flag";
+          flagsContainer.appendChild(flag);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching countries:', error);
+      });
+    </script>
+    <script src="script.js"></script>
+    </body>
+    </html>
